@@ -14,9 +14,9 @@ import { Task } from '../models/task';
 })
 export class DashboardComponent implements OnInit {
   boardStyles;
-  todoBoard;
-  inProgressBoard;
-  doneBoard;
+  todoBoard: Board;
+  inProgressBoard: Board;
+  doneBoard: Board;
 
   constructor(
     private taskService: TaskService,
@@ -32,8 +32,6 @@ export class DashboardComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<Task[]>) {
-    this.boardService.drop(event)
+    this.boardService.drop(event);
   }
-
-
 }
