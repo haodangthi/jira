@@ -24,8 +24,6 @@ export class TaskComponent implements OnInit {
   constructor(private taskService: TaskService) { }
 
   ngOnInit(): void {
-    //console.log(this.task)
-    //console.log(this.style)
   }
 
   delete = () => this.taskService.deleteTask(this.task.id);

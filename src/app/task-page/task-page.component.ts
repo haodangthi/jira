@@ -27,12 +27,6 @@ export class TaskPageComponent implements OnInit {
   statusOptions = status;
   resolutionOptions = resolution;
   editTaskForm: FormGroup;
-
-  // selectedPriority: string;
-  // selectedType: string;
-  // selectedResolution: string;
-  // details: string;
-
   constructor(
     private route: ActivatedRoute,
     private taskService: TaskService,

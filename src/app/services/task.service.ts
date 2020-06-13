@@ -19,8 +19,6 @@ export class TaskService {
   addTask(task: Task) {
     const tasks = this.tasks$.value;
     this.tasks$.next([...tasks, task]);
-
-    //return this.tasks$.next([...this.tasks$.value, task]);
   }
 
   createTaskDB = (task: Task): Observable<any> =>

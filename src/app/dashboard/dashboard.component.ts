@@ -22,11 +22,6 @@ export class DashboardComponent implements OnInit {
     private taskService: TaskService,
     private boardService: BoardService
   ) {
-    // this.taskService.tasks$.subscribe((res) => {
-    //   console.log(res[1]);
-    //   this.inProgressBoard.items = res;
-    // });
-
     this.todoBoard = this.boardService.todoBoard;
     this.inProgressBoard = this.boardService.inProgressBoard;
     this.doneBoard = this.boardService.doneBoard;

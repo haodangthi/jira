@@ -8,23 +8,21 @@ import { Task } from '../models/task';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AuthService } from '../services/auth.service';
 import { User } from 'firebase';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-create-task',
   templateUrl: './create-task.component.html',
   styleUrls: ['./create-task.component.scss'],
 })
-export class CreateTaskComponent implements OnInit {
+export class CreateTaskComponent implements OnInit, OnDestroy {
   createTaskForm: FormGroup;
-  priorityOptions = priority;
-  typeOptions = type;
-  statusOptions = status;
-  resolutionOptions = resolution;
+  priorityOptions: { value: Priority }[] = priority;
+  typeOptions: { value: Type }[] = type;
+  statusOptions: { value: Status }[] = status;
+  resolutionOptions: { value: Resolution }[] = resolution;
   user: User;
   userId: string;
-  selectedPriority: string;
-  selectedType: string;
-  selectedResolution: string;
-  details: string;
+  userSubscription: Subscription;
 
   constructor(
     private taskService: TaskService,
@@ -50,7 +48,7 @@ export class CreateTaskComponent implements OnInit {
       }),
       description: new FormControl(''),
     });
-    this.authService.userId.subscribe((res) => {
+    this.userSubscription = this.authService.userId.subscribe((res) => {
       this.userId = res.uid;
       this.user = res;
       console.log(this.user);
@@ -73,4 +71,7 @@ export class CreateTaskComponent implements OnInit {
   }
 
   closeForm = () => this.dialogRef.close();
+  ngOnDestroy() {
+    this.userSubscription.unsubscribe();
+  }
 }
