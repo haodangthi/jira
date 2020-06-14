@@ -11,8 +11,6 @@ import { MenuComponent } from './menu/menu.component';
 import { FilterComponent } from './filter/filter.component';
 import { TaskPageComponent } from './task-page/task-page.component';
 import { AuthComponent } from './auth/auth.component';
-import { LoginComponent } from './login/login.component';
-import { SignInComponent } from './sign-in/sign-in.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CreateTaskComponent } from './create-task/create-task.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -78,8 +76,6 @@ const firebaseConfig = {
     FilterComponent,
     TaskPageComponent,
     AuthComponent,
-    LoginComponent,
-    SignInComponent,
     CreateTaskComponent,
     HomeComponent,
   ],

@@ -11,7 +11,7 @@ import {
   status,
   priority,
 } from '../create-task/select-details';
-import { Status } from '../models/task-details';
+import { Status, Priority, Resolution, Type } from '../models/task-details';
 import { User } from '../models/user';
 @Component({
   selector: 'app-task-page',
@@ -22,10 +22,10 @@ export class TaskPageComponent implements OnInit {
   taskId: string;
   task: Task;
   users: User[] = [];
-  priorityOptions = priority;
-  typeOptions = type;
-  statusOptions = status;
-  resolutionOptions = resolution;
+  priorityOptions: { value: Priority }[] = priority;
+  typeOptions: { value: Type }[] = type;
+  statusOptions: { value: Status }[] = status;
+  resolutionOptions: { value: Resolution }[] = resolution;
   editTaskForm: FormGroup;
   constructor(
     private route: ActivatedRoute,

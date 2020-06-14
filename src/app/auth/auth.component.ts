@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { User } from '../models/user';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-auth',
@@ -14,7 +15,8 @@ export class AuthComponent implements OnInit, OnDestroy {
   createUserForm: FormGroup;
   loginForm: FormGroup;
   hide: boolean;
-  user;
+  user: User;
+  userIdSubscription: Subscription;
   logInError;
   signUpError;
 
@@ -35,12 +37,12 @@ export class AuthComponent implements OnInit, OnDestroy {
       email: new FormControl(null, [Validators.required]),
       password: new FormControl(null, [Validators.required]),
     });
-    // this.authService.userId.subscribe((res) => {
-    //   console.log('redirect ID=', res);
-    //   if (res) {
-    //     this.router.navigate([`/home/dashboard`]);
-    //   }
-    // });
+    this.userIdSubscription = this.authService.userId.subscribe((res) => {
+      console.log('redirect ID=', res);
+      if (res) {
+        this.router.navigate([`/home/dashboard`]);
+      }
+    });
     this.authService.logInError.subscribe((e) => {
       this.logInError = e;
     });
@@ -61,8 +63,8 @@ export class AuthComponent implements OnInit, OnDestroy {
     this.userService.createUser(this.createUserForm.value);
   }
   ngOnDestroy() {
-    this.authService.logInError.unsubscribe()
-    this.userService.signUpError.unsubscribe()
-
+    this.authService.logInError.unsubscribe();
+    this.userService.signUpError.unsubscribe();
+    this.userIdSubscription.unsubscribe();
   }
 }
