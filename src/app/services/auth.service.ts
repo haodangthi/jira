@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { of, Subject, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -20,11 +20,14 @@ export class AuthService {
     private afAuth: AngularFireAuth,
     private router: Router,
     private userService: UserService
-  ) { }
+  ) {
+    this.userId.subscribe(res => console.log('userID', res))
+
+  }
   async loginEmail(userData) {
     const { email, password } = userData;
     try {
-      const result = await this.afAuth.auth.signInWithEmailAndPassword(
+      const result = await this.afAuth.signInWithEmailAndPassword(
         email,
         password
       );
@@ -37,7 +40,7 @@ export class AuthService {
   }
   async login() {
     try {
-      const result = await this.afAuth.auth.signInWithPopup(
+      const result = await this.afAuth.signInWithPopup(
         new auth.GoogleAuthProvider()
       );
       const userData = {
@@ -60,7 +63,7 @@ export class AuthService {
     }
   }
   logOut() {
-    this.afAuth.auth.signOut();
+    this.afAuth.signOut();
     this.router.navigate(['/auth']);
   }
 }

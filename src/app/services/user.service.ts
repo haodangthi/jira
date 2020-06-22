@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { auth } from 'firebase';
@@ -21,7 +21,7 @@ export class UserService {
     const { username, email, password } = userData;
     console.log(userData, email);
     try {
-      const result = await this.afAuth.auth.createUserWithEmailAndPassword(
+      const result = await this.afAuth.createUserWithEmailAndPassword(
         email,
         password
       );
